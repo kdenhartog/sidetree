@@ -556,9 +556,12 @@ ID -->|Recovery Public Key| F(tB4W0i61jS...)</div><h2 id="did-operations"><a cla
 <li>The object MUST include a <code>publicKeys</code> property, and its value MUST be an array of key IDs that correspond with keys presently associated with the DID that are to be removed.</li>
 </ol>
 <h4 id="ietf-json-patch"><a class="toc-anchor" href="#ietf-json-patch">§</a> <code>ietf-json-patch</code></h4>
-<div id="warning-1" class="notice warning"><a class="notice-link" href="#warning-1">WARNING</a><p>Implementers of Sidetree-based DID networks that are open, permissionless, and decentralized should carefully consider the ramifications of adding free-form <em>Patch Actions</em> that are not strictly evaluated by nodes, as this is very likely to result in abuse of the implementation in a myriad of ways that are not intended, and could compromise the game theoretical economic viability of the implementation.</p>
-</div>
-<div id="example-5" class="notice example"><a class="notice-link" href="#example-5">EXAMPLE</a><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+<p>The <code>ietf-json-patch</code> Patch Action describes a mechanism for modifying a DID’s state using <a href="https://tools.ietf.org/html/rfc6902">IETF JSON Patch</a>. To construct a <code>ietf-json-patch</code> <em>Patch Action</em>, compose an object as follows:</p>
+<ol>
+<li>The object MUST include an <code>action</code> property, and its value MUST be <code>ietf-json-patch</code>.</li>
+<li>The object MUST include a <code>patches</code> property, and its value MUST be an array of <a href="https://tools.ietf.org/html/rfc6902">IETF JSON Patch</a> operation objects.</li>
+</ol>
+<div id="1" class="notice example"><a class="notice-link" href="#1">EXAMPLE</a><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"action"</span><span class="token operator">:</span> <span class="token string">"ietf-json-patch"</span><span class="token punctuation">,</span>
   <span class="token property">"patches"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">{</span> <span class="token property">"op"</span><span class="token operator">:</span> <span class="token string">"add"</span><span class="token punctuation">,</span> ... <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -570,11 +573,28 @@ ID -->|Recovery Public Key| F(tB4W0i61jS...)</div><h2 id="did-operations"><a cla
 <span class="token punctuation">}</span>
 </code></pre>
 </div>
-<p>The <code>ietf-json-patch</code> <em>Patch Action</em> describes the removal of cryptographic keys associated with a given DID. To construct a <code>ietf-json-patch</code> <em>Patch Action</em>, compose an object as follows:</p>
-<ol>
-<li>The object MUST include an <code>action</code> property, and its value MUST be <code>ietf-json-patch</code>.</li>
-<li>The object MUST include a <code>patches</code> property, and its value MUST be an array of <a href="https://tools.ietf.org/html/rfc6902">IETF JSON Patch</a> operation objects.</li>
-</ol>
+<div id="2" class="notice example"><a class="notice-link" href="#2">EXAMPLE</a><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"action"</span><span class="token operator">:</span> <span class="token string">"ietf-json-patch"</span><span class="token punctuation">,</span>
+  <span class="token property">"patches"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"op"</span><span class="token operator">:</span> <span class="token string">"replace"</span><span class="token punctuation">,</span>
+      <span class="token property">"path"</span><span class="token operator">:</span> <span class="token string">"/service"</span><span class="token punctuation">,</span>
+      <span class="token property">"value"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+              <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#edv"</span><span class="token punctuation">,</span>
+              <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"EncryptedDataVault"</span><span class="token punctuation">,</span>
+              <span class="token property">"serviceEndpoint"</span><span class="token operator">:</span> <span class="token string">"https://edv.example.com/"</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</div>
+<div id="warning-1" class="notice warning"><a class="notice-link" href="#warning-1">WARNING</a><p>Use of <code>ietf-json-patch</code> may result in unrecoverable states, similar to “Deactivated”.</p>
+</div>
+<div id="warning-2" class="notice warning"><a class="notice-link" href="#warning-2">WARNING</a><p>Use of <code>ietf-json-patch</code> may harm implementators ability to perform validation on operations at ingestion time, which could impact performance negatively.</p>
+</div>
 <h2 id="transaction-operation-processing"><a class="toc-anchor" href="#transaction-operation-processing">§</a> Transaction &amp; Operation Processing</h2>
 <h3 id="transaction-anchoring"><a class="toc-anchor" href="#transaction-anchoring">§</a> Transaction Anchoring</h3>
 <p>Once an Anchor File, Map File, and associated Batch Files have been assembled for a given set of operations, a reference to the Anchor File must be embedded within the target ledger to enter the set of operations into the Sidetree implementation’s global state. The following process:</p>
