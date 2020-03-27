@@ -767,6 +767,44 @@ did:elem:EiD0x0JeWXQbVIpBpyeyF5FDdZN1U7enAfHnd13Qk_CYpQ
 <p>Critical updates, protocol forking changes, or security patches that require all nodes to upgrade.</p>
 <h3 id="patch-discretionary-updates"><a class="toc-anchor" href="#patch-discretionary-updates">§</a> Patch - Discretionary Updates</h3>
 <p>Non-critical, minor changes that do not require nodes to upgrade.</p>
+<h2 id="context"><a class="toc-anchor" href="#context">§</a> Context</h2>
+<p>Per the <a href="https://github.com/w3c/did-core">DID Core Spec</a> an <code>@context</code> MAY be used to represent a DID Document as Linked Data.</p>
+<p>If an <code>@context</code> is present, any properties not defined in DID Core, MUST be defined in this context, or in a DID Method specific one.</p>
+<p>For example:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"@context"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"https://www.w3.org/ns/did/v1"</span><span class="token punctuation">,</span> 
+        <span class="token string">"https://identity.foundation/sidetree/context-v1.jsonld"</span><span class="token punctuation">,</span>
+        <span class="token string">"https://example.com/method/specific.jsonld"</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="usage"><a class="toc-anchor" href="#usage">§</a> usage</h3>
+<p>Deprecated. DO NOT USE.</p>
+<h3 id="publickeyjwk"><a class="toc-anchor" href="#publickeyjwk">§</a> publicKeyJwk</h3>
+<p>A secp256k1 public key in JWK format. A JSON Web Key (JWK) is a JavaScript Object Notation (JSON) data structure that represents a cryptographic key. Read <a href="https://tools.ietf.org/html/rfc7517">RFC7517</a>.</p>
+<p>Example:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#JUvpllMEYUZ2joO59UNui_XYDqxVqiFLLAJ8klWuPBw"</span><span class="token punctuation">,</span>
+  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"EcdsaSecp256k1VerificationKey2019"</span><span class="token punctuation">,</span>
+  <span class="token property">"publicKeyJwk"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"crv"</span><span class="token operator">:</span> <span class="token string">"secp256k1"</span><span class="token punctuation">,</span>
+    <span class="token property">"kid"</span><span class="token operator">:</span> <span class="token string">"JUvpllMEYUZ2joO59UNui_XYDqxVqiFLLAJ8klWuPBw"</span><span class="token punctuation">,</span>
+    <span class="token property">"kty"</span><span class="token operator">:</span> <span class="token string">"EC"</span><span class="token punctuation">,</span>
+    <span class="token property">"x"</span><span class="token operator">:</span> <span class="token string">"dWCvM4fTdeM0KmloF57zxtBPXTOythHPMm1HCLrdd3A"</span><span class="token punctuation">,</span>
+    <span class="token property">"y"</span><span class="token operator">:</span> <span class="token string">"36uMVGM7hnw-N6GnjFcihWE3SkrhMLzzLCdPMXPEXlA"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="publickeyhex"><a class="toc-anchor" href="#publickeyhex">§</a> publicKeyHex</h3>
+<p>A hex encoded secp256k1 compressed public key.</p>
+<p>Example:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"did:example:123#JUvpllMEYUZ2joO59UNui_XYDqxVqiFLLAJ8klWuPBw"</span><span class="token punctuation">,</span>
+  <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"EcdsaSecp256k1VerificationKey2019"</span><span class="token punctuation">,</span>
+  <span class="token property">"publicKeyHex"</span><span class="token operator">:</span> <span class="token string">"027560af3387d375e3342a6968179ef3c6d04f5d33b2b611cf326d4708badd7770"</span>
+<span class="token punctuation">}</span>
+</code></pre>
 
               </article>    
 
@@ -858,6 +896,13 @@ did:elem:EiD0x0JeWXQbVIpBpyeyF5FDdZN1U7enAfHnd13Qk_CYpQ
 <li><a href="#patch-discretionary-updates">Patch - Discretionary Updates</a></li>
 </ul>
 </li>
+<li><a href="#context">Context</a>
+<ul>
+<li><a href="#usage">usage</a></li>
+<li><a href="#publickeyjwk">publicKeyJwk</a></li>
+<li><a href="#publickeyhex">publicKeyHex</a></li>
+</ul>
+</li>
 </ul>
 
                 </div>
@@ -866,7 +911,7 @@ did:elem:EiD0x0JeWXQbVIpBpyeyF5FDdZN1U7enAfHnd13Qk_CYpQ
             </slide-panels>
 
           </body>
-          <script>window.specConfig = {"title":"DIF Sidetree Protocol","logo":"https://rawcdn.githack.com/decentralized-identity/decentralized-identity.github.io/a3ca39717e440302d1fd99a796e7f00e1c42eb2d/images/logo-flat.svg","logo_link":"https://identity.foundation","source":{"host":"github","account":"decentralized-identity","repo":"sidetree"},"spec_directory":"./docs/spec/","markdown_paths":["markdown/title.md","markdown/abstract.md","markdown/intro.md","markdown/terminology.md","markdown/versioning-params.md","markdown/topology.md","markdown/file-structures.md","markdown/unique-suffix.md","markdown/operations.md","markdown/patches.md","markdown/processing.md","markdown/pof.md","markdown/resolution.md","markdown/method-versioning.md","markdown/protocol-versioning.md"],"destination":"./docs/spec/","destinationResourcePrefix":"../../docs/spec/","rootResourcePrefix":"./docs/spec/"}</script>
+          <script>window.specConfig = {"title":"DIF Sidetree Protocol","logo":"https://rawcdn.githack.com/decentralized-identity/decentralized-identity.github.io/a3ca39717e440302d1fd99a796e7f00e1c42eb2d/images/logo-flat.svg","logo_link":"https://identity.foundation","source":{"host":"github","account":"decentralized-identity","repo":"sidetree"},"spec_directory":"./docs/spec/","markdown_paths":["markdown/title.md","markdown/abstract.md","markdown/intro.md","markdown/terminology.md","markdown/versioning-params.md","markdown/topology.md","markdown/file-structures.md","markdown/unique-suffix.md","markdown/operations.md","markdown/patches.md","markdown/processing.md","markdown/pof.md","markdown/resolution.md","markdown/method-versioning.md","markdown/protocol-versioning.md","markdown/context.md"],"destination":"./docs/spec/","destinationResourcePrefix":"../../docs/spec/","rootResourcePrefix":"./docs/spec/"}</script>
           <script src="../../docs/spec/spec-up/js/markdown-it.js"></script>
           <script src="../../docs/spec/spec-up/js/prism.js" data-manual></script>
           <script src="../../docs/spec/spec-up/js/mermaid.js"></script>
