@@ -375,7 +375,7 @@
 </ol>
 <h3 id="batch-files"><a class="toc-anchor" href="#batch-files">§</a> Batch Files</h3>
 <p>Batch Files are JSON Documents, compressed via the <a href="#compression-algorithm">COMPRESSION_ALGORITHM</a> contain Sidetree Operation source data, which are composed of delta-based CRDT entries that modify the state of a Sidetree identifier’s DID Document.</p>
-<p>For the this version of the protocol, there will only exist a single Batch File that contains all the state modifying data for all operations in the included set. Future versions of the protocol will separate the total set of included operations into mutliple chunks, each with their own Batch File.</p>
+<p>For this version of the protocol, there will only exist a single Batch File that contains all the state modifying data for all operations in the included set. Future versions of the protocol will separate the total set of included operations into multiple chunks, each with their own Batch File.</p>
 <div id="create-operation-batch-file-entry" class="notice example"><a class="notice-link" href="#create-operation-batch-file-entry">EXAMPLE</a><pre class="language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"operations"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">{</span> SIDETREE_OPERATION <span class="token punctuation">}</span><span class="token punctuation">,</span>
