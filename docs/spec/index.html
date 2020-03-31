@@ -351,7 +351,7 @@
 </div>
 <p>A valid Map File is a JSON document that MUST NOT exceed the <a href="#max-map-file-size"><code>MAX_MAP_FILE_SIZE</code></a>, and composed as follows:</p>
 <ol>
-<li>The Anchor File MUST contain a <code>chunks</code> property, and its value MUST be an array of <em>Batch Chunk Entries</em> for the related Batch File data.
+<li>The Map File MUST contain a <code>chunks</code> property, and its value MUST be an array of <em>Batch Chunk Entries</em> for the related Batch File data.
 <ul>
 <li>Future versions of the protocol will specify a process for separating the total operations in a batch into multiple <em>Batch Chunk Entries</em>, but for this version of the protocol there MUST be only one <em>Batch Chunk Entry</em> object present in the array, which is composed as follows:
 <ol>
@@ -404,7 +404,7 @@ ID -->|Recovery Commitment Hash| D(oqBQgzhMDw...)
 ID -->|Create Operation Data Hash| E(xKwW0h6HjS...)
 ID -->|Recovery Public Key| F(tB4W0i61jS...)</div><h2 id="did-operations"><a class="toc-anchor" href="#did-operations">§</a> DID Operations</h2>
 <p>Sidetree-based DIDs support a variety of DID operations, all of which require the DID owner to generate specific data values and cryptographic material. The sections below describe how to perform each type of operation, and how those operations are represented in the CAS-replicated files that are anchored to the underlying ledger system.</p>
-<p>While virtually all DID owners will engage User Agent applications on their local devices to perform these operations, most will not generate the anchoring transactions on the underlying ledger. Instead, most users will likely send the anchoring-related operation values they generate to external nodes for anchoring. This is relatively safe, because operations require signatures that an external node cannot forge. The only attack available to a rouge node operator is to not anchor the operations a DID owner sends them. However, the DID owner can detect this (via a scan of subsequent blocks) and send their operation to a different node or do it themselves, if they so desire.</p>
+<p>While virtually all DID owners will engage User Agent applications on their local devices to perform these operations, most will not generate the anchoring transactions on the underlying ledger. Instead, most users will likely send the anchoring-related operation values they generate to external nodes for anchoring. This is relatively safe, because operations require signatures that an external node cannot forge. The only attack available to a rogue node operator is to not anchor the operations a DID owner sends them. However, the DID owner can detect this (via a scan of subsequent blocks) and send their operation to a different node or do it themselves, if they so desire.</p>
 <div id="note-1" class="notice note"><a class="notice-link" href="#note-1">NOTE</a><p>This specification does not define an API for sending public DID operation values to third-party Sidetree nodes for external anchoring, as that is an elective activity has no bearing on the technical workings of the protocol, its capabilities, or its security guarantees.</p>
 </div>
 <h3 id="create"><a class="toc-anchor" href="#create">§</a> Create</h3>
@@ -488,6 +488,7 @@ ID -->|Recovery Public Key| F(tB4W0i61jS...)</div><h2 id="did-operations"><a cla
 <li><code>remove-public-keys</code></li>
 <li><code>add-service-endpoints</code></li>
 <li><code>remove-service-endpoints</code></li>
+<li><code>ietf-json-patch</code></li>
 </ul>
 </li>
 </ol>
