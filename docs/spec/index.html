@@ -74,7 +74,7 @@
 <tbody>
 <tr>
 <td>Anchor File</td>
-<td>JSON Document containing proving and index data for Create, Recovery, and Revocation operations, and a CAS URI for the associated Map File. This file is anchored to the target ledger.</td>
+<td>JSON Document containing proving and index data for Create, Recovery, and Deactivate operations, and a CAS URI for the associated Map File. This file is anchored to the target ledger.</td>
 </tr>
 <tr>
 <td>Map File</td>
@@ -110,7 +110,7 @@
 </tr>
 <tr>
 <td>Recovery Key</td>
-<td>Public/private key pair used to perform a Recovery or Revocation operation.</td>
+<td>Public/private key pair used to perform a Recovery or Deactivate operation. Must be encoded as JWK or Hex.</td>
 </tr>
 <tr>
 <td>Sidetree Node</td>
@@ -140,12 +140,12 @@
 </tr>
 <tr>
 <td id="key-algorithm"><code>KEY_ALGORITHM</code></td>
-<td>Asymmetric public key algorithm for signing DID operations.</td>
+<td>Asymmetric public key algorithm for signing DID operations. Must be a valid JWK <code>crv</code>.</td>
 <td style="text-align:left">secp256k1</td>
 </tr>
 <tr>
 <td id="sig-algorithm"><code>SIGNATURE_ALGORITHM</code></td>
-<td>Asymmetric public key signature algorithm.</td>
+<td>Asymmetric public key signature algorithm. Must be a valid JWS <code>alg</code>.</td>
 <td style="text-align:left">ES256K</td>
 </tr>
 <tr>
