@@ -120,6 +120,10 @@
 <td>Transaction</td>
 <td>Ledger transaction that anchors a set of Sidetree operations, via a CAS URI for an associated Anchor File.</td>
 </tr>
+<tr>
+<td id="ledger-time">Ledger Time</td>
+<td>The deterministic logical clock variable manifested in the underlying ledger system that can be used as a deterministic chronological reference (e.g. Bitcoin block numbers).</td>
+</tr>
 </tbody>
 </table>
 <h2 id="protocol-versioning"><a class="toc-anchor" href="#protocol-versioning">§</a> Protocol Versioning</h2>
@@ -140,7 +144,7 @@
 <li><strong>Patch:</strong> Non-critical changes that do not require nodes to upgrade.</li>
 </ul>
 <h3 id="new-version-activation"><a class="toc-anchor" href="#new-version-activation">§</a> New Version Activation</h3>
-<p>New versions of the protocol, or modifications to parameter values by implementers, MUST be activated at a specified <em>ledger time</em> so all nodes can remain in sync by enforcing the same ruleset and parameters beginning at the same logical starting point. All transactions that occur after the specified <em>ledger time</em> will adhere to the associated version’s rules and parameters until a newer version of the protocol is defined and implemented at a future <em>ledger time</em>.</p>
+<p>New versions of the protocol, or modifications to parameter values by implementers, MUST be activated at a specified <a href="#ledger-time"><em>Ledger Time</em></a> so all nodes can remain in sync by enforcing the same ruleset and parameters beginning at the same logical starting point. All transactions that occur after the specified <a href="#ledger-time"><em>Ledger Time</em></a> will adhere to the associated version’s rules and parameters until a newer version of the protocol is defined and implemented at a future <a href="#ledger-time"><em>Ledger Time</em></a>.</p>
 <h2 id="default-parameters"><a class="toc-anchor" href="#default-parameters">§</a> Default Parameters</h2>
 <p>Each version of the protocol will define a set of protocol rules and parameters with default suggested values. The following are the parameters used by this version of the Sidetree protocol - implementers MAY choose different options than the defaults listed below:</p>
 <table>
@@ -320,7 +324,7 @@
 <li>If there are any <a href="#recover">Recovery</a> operations to be included in the Anchor File:
 <ol>
 <li>The <code>operations</code> object MUST include a <code>recover</code> property, and its value MUST be an array.</li>
-<li>For each <a href="#recover">Recovery</a> operation to be included in the <code>recover</code> array, herein referred to as <a href="#anchor-file-recovery-entry"><em>Anchor File Recovery Entries</em></a>, use the following process to compose and include entries:
+<li>For each <a href="#recover">Recovery</a> operation to be included in the <code>recover</code> array, herein referred to as <a href="#anchor-file-recovery-entry" id="anchor-file-recovery-entry"><em>Anchor File Recovery Entries</em></a>, use the following process to compose and include entries:
 <ul>
 <li>The object MUST contain an <code>did_suffix</code> property, and its value MUST be the <a href="#did-suffix">DID Suffix</a> of the DID the operation pertains to. An Anchor File MUST NOT contain more than one operation of any type with the same <a href="#did-suffix">DID Suffix</a>.</li>
 <li>The object MUST contain a <code>recovery_reveal_value</code> property, and its value MUST be the last recovery <a href="#commitment-value">COMMITMENT_VALUE</a>.</li>
@@ -402,7 +406,7 @@
 </li>
 <li>If there are any <a href="#update">Update</a> operations to be included in the Map File, the Map File MUST include an <code>operations</code> property, and its value MUST be an object composed as follows:</li>
 <li>The <code>operations</code> object MUST include an <code>update</code> property, and its value MUST be an array.</li>
-<li>For each <a href="#update">Update</a> operation to be included in the <code>update</code> array, herein referred to as <a href="#map-file-update-entry">Map File Update Entries</a>, use the following process to compose and include entries:
+<li>For each <a href="#update">Update</a> operation to be included in the <code>update</code> array, herein referred to as <a href="#map-file-update-entry" id="map-file-update-entry">Map File Update Entries</a>, use the following process to compose and include entries:
 <ul>
 <li>The object MUST contain an <code>id</code> property, and its value MUST be the <a href="#did-suffix">DID Suffix</a> of the DID the operation pertains to.</li>
 <li>The object MUST contain a <code>update_reveal_value</code> property, and its value MUST be the last update <a href="#commitment-value">COMMITMENT_VALUE</a>.</li>
@@ -445,8 +449,8 @@
 <p>Each <a href="#chunk-file-patch-entry"><em>Chunk File Delta Entry</em></a> MUST be appended to the <code>deltas</code> array as follows:</p>
 <ol>
 <li>If any Create operations were present in the associated Anchor File, append all <a href="#create-data-object"><em>Create Operation Data Objects</em></a> in the same index order as their matching <a href="#anchor-file-create-entry"><em>Anchor File Create Entry</em></a>.</li>
-<li>If any Recovery operations were present in the associated Anchor File, append all <a href="#recovery-data-object">Recovery Operation Data Objects_</a> in the same index order as their matching <a href="#anchor-file-recovery-entry"><em>Anchor File Recovery Entry</em></a>.</li>
-<li>If any Update operations were present in the associated Map File, append all <a href="#update-data-object">Update Operation Data Objects_</a> in the same index order as their matching <a href="#map-file-update-entry"><em>Map File Update Entry</em></a>.</li>
+<li>If any Recovery operations were present in the associated Anchor File, append all <a href="#recovery-data-object"><em>Recovery Operation Data Objects</em></a> in the same index order as their matching <a href="#anchor-file-recovery-entry"><em>Anchor File Recovery Entry</em></a>.</li>
+<li>If any Update operations were present in the associated Map File, append all <a href="#update-data-object"><em>Update Operation Data Objects</em></a> in the same index order as their matching <a href="#map-file-update-entry"><em>Map File Update Entry</em></a>.</li>
 </ol>
 </li>
 </ol>
